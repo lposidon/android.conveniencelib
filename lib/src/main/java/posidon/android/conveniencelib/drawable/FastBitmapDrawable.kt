@@ -3,7 +3,7 @@ package posidon.android.conveniencelib.drawable
 import android.graphics.*
 import android.graphics.drawable.Drawable
 
-internal class FastBitmapDrawable(val bitmap: Bitmap?) : Drawable() {
+class FastBitmapDrawable(val bitmap: Bitmap?) : Drawable() {
 
     private val width = bitmap?.width ?: 0
     override fun getIntrinsicWidth() = width
