@@ -1,6 +1,7 @@
 package posidon.android.conveniencelib
 
 import androidx.annotation.ColorInt
+import androidx.annotation.FloatRange
 
 object Colors {
 
@@ -27,5 +28,9 @@ object Colors {
     @ColorInt
     inline fun argb(alpha: Int, red: Int, green: Int, blue: Int): Int = alpha shl 24 or (red shl 16) or (green shl 8) or blue
 
+    @Deprecated("This is bad, just use luminance instead")
     inline fun useDarkText(@ColorInt bg: Int): Boolean = green(bg) > 240 || (green(bg) > 200 && red(bg) > 120)
+
+    @FloatRange(from = 0.0, to = 1.0)
+    inline fun getLuminance(color: Int) = 0.2126 * red(color) / 255f + 0.7152 * green(color) / 255f + 0.0722 * blue(color) / 255f
 }
