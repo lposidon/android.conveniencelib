@@ -3,6 +3,8 @@ package posidon.android.conveniencelib
 import android.content.Context
 import android.content.res.Configuration
 import android.content.res.Resources
+import android.graphics.Point
+import android.view.WindowManager
 
 object Device {
 
@@ -13,8 +15,18 @@ object Device {
     inline fun isTablet(context: Context): Boolean = isTablet(context.resources)
 
     inline fun hasNavigationBar(resources: Resources): Boolean {
-        val id: Int = resources.getIdentifier("config_showNavigationBar", "bool", "android")
+        val navBarInteractionModeId = resources.getIdentifier(
+            "config_navBarInteractionMode",
+            "integer",
+            "android"
+        )
+        if (navBarInteractionModeId > 0 && resources.getInteger(navBarInteractionModeId) > 0) {
+            // nav gesture is enabled in the settings
+            return false
+        }
+        val id = resources.getIdentifier("config_showNavigationBar", "bool", "android")
         return id != 0 && resources.getBoolean(id)
     }
+
     inline fun hasNavigationBar(context: Context): Boolean = hasNavigationBar(context.resources)
 }
