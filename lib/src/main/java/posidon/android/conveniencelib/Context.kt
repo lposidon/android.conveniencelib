@@ -25,8 +25,13 @@ inline fun Context.pullStatusbar() {
 }
 
 inline fun Context.getStatusBarHeight(): Int {
-    val resourceId = resources.getIdentifier("status_bar_height", "dimen", "android")
-    return if (resourceId > 0) resources.getDimensionPixelSize(resourceId) else 0
+    val id = resources.getIdentifier("status_bar_height", "dimen", "android")
+    return if (id > 0) resources.getDimensionPixelSize(id) else 0
+}
+
+inline fun Context.getNavigationBarHeight(): Int {
+    val id = resources.getIdentifier("navigation_bar_height", "dimen", "android")
+    return if (id > 0) resources.getDimensionPixelSize(id) else 0
 }
 
 @RequiresPermission(android.Manifest.permission.VIBRATE)

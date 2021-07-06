@@ -55,6 +55,7 @@ object Graphics {
                 }
             }
             d is MaskedDrawable -> tryAnimate(activity, d.drawable)
+            d is Animatable -> d.start()
         }
         return d
     }
