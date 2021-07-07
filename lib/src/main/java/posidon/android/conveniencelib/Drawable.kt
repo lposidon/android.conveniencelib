@@ -6,10 +6,8 @@ import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 
 inline fun Drawable.toBitmap(duplicateIfBitmapDrawable: Boolean = false): Bitmap {
-    if (this is BitmapDrawable && bitmap != null) {
-        return if (duplicateIfBitmapDrawable) {
-            Bitmap.createBitmap(bitmap)
-        } else bitmap
+    if (duplicateIfBitmapDrawable && this is BitmapDrawable && bitmap != null) {
+        return bitmap
     }
     val bitmap: Bitmap = if (intrinsicWidth <= 0 || intrinsicHeight <= 0) Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888)
     else Bitmap.createBitmap(intrinsicWidth, intrinsicHeight, Bitmap.Config.ARGB_8888)
@@ -21,10 +19,8 @@ inline fun Drawable.toBitmap(duplicateIfBitmapDrawable: Boolean = false): Bitmap
 }
 
 inline fun Drawable.toBitmap(width: Int, height: Int, duplicateIfBitmapDrawable: Boolean = false): Bitmap {
-    if (this is BitmapDrawable && bitmap != null) {
-        return if (duplicateIfBitmapDrawable) {
-            Bitmap.createBitmap(bitmap)
-        } else bitmap
+    if (duplicateIfBitmapDrawable && this is BitmapDrawable && bitmap != null) {
+        return bitmap
     }
     val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
     val canvas = Canvas(bitmap)
