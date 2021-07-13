@@ -1,11 +1,13 @@
 package posidon.android.conveniencelib
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.media.AudioAttributes
 import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
+import android.view.WindowInsets
 import androidx.annotation.RequiresPermission
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -29,9 +31,10 @@ inline fun Context.getStatusBarHeight(): Int {
     return if (id > 0) resources.getDimensionPixelSize(id) else 0
 }
 
+@Deprecated("Needs windowManager")
 inline fun Context.getNavigationBarHeight(): Int {
     val id = resources.getIdentifier("navigation_bar_height", "dimen", "android")
-    return if (id > 0 && !Device.hasNavigationBar(this)) resources.getDimensionPixelSize(id) else 0
+    return if (id > 0) resources.getDimensionPixelSize(id) else 0
 }
 
 @RequiresPermission(android.Manifest.permission.VIBRATE)

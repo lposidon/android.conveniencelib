@@ -3,18 +3,11 @@ package posidon.android.conveniencelib
 import android.animation.Animator
 import android.app.Activity
 import android.content.pm.PackageManager
+import android.os.Build
 import android.view.View
 import android.view.ViewPropertyAnimator
+import android.view.WindowInsets
 import android.view.inputmethod.InputMethodManager
-
-inline fun Activity.hideKeyboard() {
-    val imm = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-    var view = currentFocus
-    if (view == null) {
-        view = View(this)
-    }
-    imm.hideSoftInputFromWindow(view.windowToken, 0)
-}
 
 inline fun ViewPropertyAnimator.onEnd(crossinline onEnd: (animation: Animator?) -> Unit): ViewPropertyAnimator = setListener(object : Animator.AnimatorListener {
     override fun onAnimationRepeat(animation: Animator?) {}
