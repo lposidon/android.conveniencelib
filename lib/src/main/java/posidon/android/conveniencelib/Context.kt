@@ -31,12 +31,6 @@ inline fun Context.getStatusBarHeight(): Int {
     return if (id > 0) resources.getDimensionPixelSize(id) else 0
 }
 
-@Deprecated("Needs windowManager")
-inline fun Context.getNavigationBarHeight(): Int {
-    val id = resources.getIdentifier("navigation_bar_height", "dimen", "android")
-    return if (id > 0) resources.getDimensionPixelSize(id) else 0
-}
-
 @RequiresPermission(android.Manifest.permission.VIBRATE)
 inline fun Context.vibrate(duration: Int) {
     if (duration != 0) {
