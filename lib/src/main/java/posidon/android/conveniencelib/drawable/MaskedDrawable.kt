@@ -2,6 +2,8 @@ package posidon.android.conveniencelib.drawable
 
 import android.graphics.*
 import android.graphics.drawable.Drawable
+import android.os.Build
+import androidx.core.graphics.withSave
 
 class MaskedDrawable(
     val drawable: Drawable,
@@ -17,27 +19,35 @@ class MaskedDrawable(
         xfermode = PorterDuffXfermode(PorterDuff.Mode.DST_OUT)
     }
 
-    private val paint = Paint().apply {
-        isAntiAlias = true
-    }
-
     private val bitmap = Bitmap.createBitmap(intrinsicWidth, intrinsicHeight, Bitmap.Config.ARGB_8888)
 
     private val c = Canvas(bitmap)
 
     override fun draw(canvas: Canvas) {
-        try {
-            drawable.draw(c)
-            c.drawPath(path, maskPaint)
-            canvas.drawBitmap(bitmap, null, bounds, paint)
-        } catch (e: Exception) {}
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            canvas.withSave {
+                canvas.translate(bounds.left.toFloat(), bounds.top.toFloat())
+                canvas.scale(
+                    bounds.width() / drawable.bounds.width().toFloat(),
+                    bounds.height() / drawable.bounds.height().toFloat()
+                )
+                canvas.clipOutPath(path)
+                drawable.draw(canvas)
+            }
+        } else {
+            try {
+                drawable.draw(c)
+                c.drawPath(path, maskPaint)
+                canvas.drawBitmap(bitmap, null, bounds, null)
+            } catch (e: Exception) {}
+        }
     }
 
     override fun getIntrinsicWidth() = drawable.intrinsicWidth
     override fun getIntrinsicHeight() = drawable.intrinsicHeight
 
-    override fun setAlpha(alpha: Int) { paint.alpha = alpha }
-    override fun getAlpha() = paint.alpha
+    override fun setAlpha(alpha: Int) { drawable.alpha = alpha }
+    override fun getAlpha() = drawable.alpha
 
     override fun getOpacity(): Int = PixelFormat.TRANSLUCENT
 
