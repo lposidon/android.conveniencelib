@@ -1,4 +1,4 @@
-package posidon.android.conveniencelib.drawable
+package io.posidon.android.conveniencelib.drawable
 
 import android.graphics.*
 import android.graphics.drawable.Drawable

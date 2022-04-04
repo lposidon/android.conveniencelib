@@ -1,12 +1,10 @@
-package posidon.android.conveniencelib
+package io.posidon.android.conveniencelib
 
 import android.app.Activity
-import android.graphics.Point
 import android.os.Build
 import android.util.DisplayMetrics
 import android.view.View
 import android.view.WindowInsets
-import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import kotlin.math.min
 

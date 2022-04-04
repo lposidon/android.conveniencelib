@@ -1,11 +1,11 @@
-package posidon.android.conveniencelib.demo
+package io.posidon.android.conveniencelib.demo
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.core.view.updateLayoutParams
-import posidon.android.conveniencelib.getNavigationBarHeight
+import io.posidon.android.conveniencelib.getNavigationBarHeight
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,19 +1,15 @@
-package posidon.android.conveniencelib
+package io.posidon.android.conveniencelib
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Context
+import android.content.pm.PackageManager
 import android.media.AudioAttributes
 import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
-import android.view.WindowInsets
 import androidx.annotation.RequiresPermission
 import java.io.BufferedReader
 import java.io.InputStreamReader
-
-inline fun Context.dp(x: Number) = resources.dp(x)
-inline fun Context.sp(x: Number) = resources.sp(x)
 
 inline val Context.isAirplaneModeOn get() =
     android.provider.Settings.System.getInt(contentResolver, android.provider.Settings.Global.AIRPLANE_MODE_ON, 0) != 0
@@ -47,4 +43,8 @@ inline fun <T> Context.loadRaw(id: Int, fn: (BufferedReader) -> T) =
         fn(reader)
     }
 
-inline fun Context.isPackageInstalled(packageName: String) = packageManager.isInstalled(packageName)
+inline fun PackageManager.isInstalled(packageName: String): Boolean {
+    try { getPackageInfo(packageName, 0) }
+    catch (e: Exception) { return false }
+    return true
+}

@@ -1,4 +1,4 @@
-package posidon.android.conveniencelib
+package io.posidon.android.conveniencelib.drawable
 
 import android.graphics.Bitmap
 import android.graphics.Canvas
@@ -30,4 +30,4 @@ inline fun Drawable.toBitmap(width: Int, height: Int, duplicateIfBitmapDrawable:
     return bitmap
 }
 
-inline fun Drawable.clone() = constantState?.newDrawable()?.mutate()
+inline fun Drawable.clone(): Drawable? = constantState?.newDrawable()?.mutate()

@@ -1,10 +1,8 @@
-package posidon.android.conveniencelib
+package io.posidon.android.conveniencelib
 
 import android.content.Context
 import android.content.res.Configuration
 import android.content.res.Resources
-import android.graphics.Point
-import android.view.WindowManager
 
 object Device {
 
